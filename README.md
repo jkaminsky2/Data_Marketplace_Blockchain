@@ -13,8 +13,6 @@ To run `malware_and_pii` (while this is encoded in the smart contract, meaning y
 ## Project Organization
 
 ```
-├── LICENSE            <- Open-source license if one is chosen
-├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
 ├── README.md          <- The top-level README for developers using this project.
 ├── data
 │   ├── external       <- Data from third party sources.
@@ -26,7 +24,7 @@ To run `malware_and_pii` (while this is encoded in the smart contract, meaning y
 │
 ├── models             <- Trained and serialized models, model predictions, or model summaries
 │
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
+├── notebooks          <- Jupyter notebooks and .py files. Naming convention is a number (for ordering),
 │                         the creator's initials, and a short `-` delimited description, e.g.
 │                         `1.0-jqp-initial-data-exploration`.
 │
@@ -43,22 +41,9 @@ To run `malware_and_pii` (while this is encoded in the smart contract, meaning y
 │
 ├── setup.cfg          <- Configuration file for flake8
 │
+├── index.html          <- Main page for webpage
+│
 └── data_marketplace_blockchain   <- Source code for use in this project.
-    │
-    ├── __init__.py             <- Makes data_marketplace_blockchain a Python module
-    │
-    ├── config.py               <- Store useful variables and configuration
-    │
-    ├── dataset.py              <- Scripts to download or generate data
-    │
-    ├── features.py             <- Code to create features for modeling
-    │
-    ├── modeling                
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
-    │   └── train.py            <- Code to train models
-    │
-    └── plots.py                <- Code to create visualizations
 ```
 
 --------

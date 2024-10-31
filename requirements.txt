@@ -10,4 +10,9 @@ pandas
 pip
 python-dotenv
 scikit-learn
+requests
+json
+re
+argparse
+spacy
 -e .

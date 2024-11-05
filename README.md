@@ -1,6 +1,6 @@
 # Data Marketplace Blockchain
 
-Project website: https://suaye07.github.io/DSC180A_website/
+**Project website:** https://suaye07.github.io/DSC180A_website/
 
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />

@@ -8,6 +8,48 @@ This repo contains the back-end code for a decentralized application (dapp), spe
 
 To run `malware_and_pii` (while this is encoded in the smart contract, meaning you would typically not run it on its own, this would be how you would test the code on a csv file), you need the following libraries (which are incuded in the `requirements.txt` file: `requests`, `json`, `pandas`, `re`, `argparse`, and `spacy`. Then download the repo locally and run the following in your terminal: python3 /path/malware_and_pii.py /path/csv_file_to_check.csv
 
+Here is the instrcutions for the upload and fetch demo to IPFS
+
+Create the directory and install library
+
+mkdir piñata-demo && cd piñata-demo && npm init -y
+npm install @pinata/sdk
+npm install piñata
+
+Add sample file for upload
+
+echo example>h.txt
+
+Add require file for fetch and upload, then paste the code to these two file
+
+echo a>fetch.js 
+Echo a>upload.js
+
+Upload.js
+Change the PINATA_JWT,GATEWAY_URL from your account
+Change the blob and file to the file you want to upload
+
+Call node upload.js to run
+
+It should return
+{
+  id: '0192f5f6-a551-79d5-8dc9-87408d477aca',
+  name: 'h.txt',
+  cid: 'bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y',
+  created_at: '2024-11-04T06:57:15.754Z',
+  size: 8,
+  number_of_files: 1,
+  mime_type: 'text/plain',
+  user_id: '069409e4-03da-4325-b61d-59cf8ddcd452'
+}
+
+Fetch.js
+Change the PINATA_JWT,GATEWAY_URL from your account
+Change the cid to file you want to fetch
+
+Call node fetch.js
+
+It will return the data in file and type
 
 
 ## Project Organization

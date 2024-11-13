@@ -7,7 +7,7 @@ name = "data_marketplace_blockchain"
 version = "0.0.1"
 description = "A short description of the project."
 authors = [
-  { name = "DSC 180A - B16" },
+  { name = "DSC_180A_B16_Group_2" },
 ]
 
 readme = "README.md"

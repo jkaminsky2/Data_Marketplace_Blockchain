@@ -12,6 +12,7 @@ python-dotenv
 scikit-learn
 requests
 re
+json
 argparse
 spacy
 chardet

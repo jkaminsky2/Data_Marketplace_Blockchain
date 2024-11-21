@@ -10,7 +10,7 @@
     <title>Upload CSV</title>
 </head>
 <body>
-    <h2>Upload a CSV File</h2>
+    <h2>Upload the CSV File</h2>
     <form id="uploadForm" enctype="multipart/form-data">
         <input type="file" id="fileInput" name="file" accept=".csv" required />
         <button type="submit">Upload</button>
@@ -37,8 +37,8 @@
     formData.append('file', file);
 
     // Send the file to your API
-    fetch('https://jtsu861zt8.execute-api.us-east-2.amazonaws.com/Deploy/', {
-        method: 'upload',
+    fetch('https://xft82zjv8g.execute-api.us-east-2.amazonaws.com/default/', {
+        method: 'test_lambda',
         body: formData,
     })
     .then(response => {

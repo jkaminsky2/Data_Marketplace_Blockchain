@@ -21,35 +21,44 @@
     <script>
         // Handle the form submission
         document.getElementById('uploadForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting the default way
+    event.preventDefault(); // Prevent the form from submitting the default way
 
-            // Get the file input element
-            const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0]; // Get the file that was uploaded
+    // Get the file input element
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0]; // Get the file that was uploaded
 
-            if (!file) {
-                document.getElementById('response').innerText = 'Please select a file.';
-                return;
-            }
+    if (!file) {
+        document.getElementById('response').innerText = 'Please select a file.';
+        return;
+    }
 
-            // Create a FormData object to send the file as multipart/form-data
-            const formData = new FormData();
-            formData.append('file', file);
+    // Create a FormData object to send the file as multipart/form-data
+    const formData = new FormData();
+    formData.append('file', file);
 
-            // Send the file to your API
-            fetch('https://jtsu861zt8.execute-api.us-east-2.amazonaws.com/Deploy/', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('response').innerText = 'Upload successful!';
-                console.log(data);
-            })
-            .catch(error => {
-                document.getElementById('response').innerText = 'Error uploading file.';
-                console.error('Error:', error);
+    // Send the file to your API
+    fetch('YOUR_API_URL', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        // Check if the response is ok (status code 200-299)
+        if (!response.ok) {
+            return response.text().then(text => {
+                throw new Error(`API error: ${response.status} - ${text}`);
             });
+        }
+        return response.json();
+    })
+    .then(data => {
+        document.getElementById('response').innerText = 'Upload successful!';
+        console.log(data);
+    })
+    .catch(error => {
+        document.getElementById('response').innerText = `Error uploading file: ${error.message}`;
+        console.error('Error:', error);
+    });
+
         });
     </script>
 </body>

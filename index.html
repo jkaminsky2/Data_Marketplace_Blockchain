@@ -1,109 +1,63 @@
 <!-- 
   Website Repo: https://github.com/suaye07/DSC180_proj_web.git
 -->
-<!-- Website Repo: https://github.com/suaye07/DSC180_proj_web.git -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Dataset</title>
-    <style>
-        .message {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-        .success {
-            color: green;
-        }
-        .failure {
-            color: red;
-        }
-    </style>
+    <title>CSV Upload</title>
 </head>
 <body>
-    <h1>Upload a Dataset</h1>
-    <input type="file" id="fileInput" />
-    <button onclick="handleFileUpload()">Upload</button>
+    <form id="csvUploadForm" enctype="multipart/form-data">
+        <input type="file" id="csvFile" accept=".csv" />
+        <button type="submit">Upload the CSV</button>
+    </form>
 
-    <div id="statusMessage" class="message"></div>
+    <!-- Loading message -->
+    <p id="loadingMessage" style="display: none;">Loading...</p>
 
     <script>
-        // Function to handle the file upload and send to Lambda
-        async function handleFileUpload() {
-            const fileInput = document.getElementById('fileInput');
-            const statusMessage = document.getElementById('statusMessage');
+        document.getElementById('csvUploadForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
 
-            if (fileInput.files.length === 0) {
-                statusMessage.textContent = 'Please select a file to upload.';
-                statusMessage.className = 'message failure';
-                return;
-            }
-            
+            const fileInput = document.getElementById('csvFile');
+            const loadingMessage = document.getElementById('loadingMessage');
             const file = fileInput.files[0];
-            
-            try {
-                const base64Dataset = await convertToBase64(file);
-                const result = await sendDatasetToLambda(base64Dataset);
 
-                // Output success or failure based on the Lambda response
-                if (result.success) {
-                    statusMessage.textContent = 'Dataset uploaded successfully!';
-                    statusMessage.className = 'message success';
-                } else {
-                    statusMessage.textContent = `Failed to upload dataset: ${result.error || 'Unknown error'}`;
-                    statusMessage.className = 'message failure';
-                }
-            } catch (error) {
-                console.error('Error uploading file:', error);
-                statusMessage.textContent = 'Error uploading the file.';
-                statusMessage.className = 'message failure';
-            }
-        }
+            if (file) {
+                // Show the loading message
+                loadingMessage.style.display = 'block';
 
-        // Convert file to base64
-        function convertToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                
-                reader.onload = function(event) {
-                    resolve(event.target.result.split(',')[1]); // Get base64 string without data URL prefix
-                };
-                
-                reader.onerror = function(error) {
-                    reject(error);
-                };
-                
-                reader.readAsDataURL(file);
-            });
-        }
+                const formData = new FormData();
+                formData.append('file', file);
 
-        // Send the base64-encoded dataset to the Lambda function
-        async function sendDatasetToLambda(base64Dataset) {
-            try {
-                const response = await fetch('https://629dvfww9a.execute-api.us-east-2.amazonaws.com/dev/upload', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        dataset: base64Dataset
+                try {
+                    // Send the file to your AWS Lambda or API Gateway endpoint
+                    const response = await fetch('https://629dvfww9a.execute-api.us-east-2.amazonaws.com/dev', {
+                        mode: 'cors',
+                        credentials: 'include',
+                        method: 'POST',
+                        body: formData,
                     })
-                });
+                      
 
-                const responseData = await response.json();
-                
-                if (response.ok && responseData && responseData.message === 'Dataset processed successfully') {
-                    return { success: true };
-                } else {
-                    return { success: false, error: responseData.error || 'Unknown error' };
+                    if (response.ok) {
+                        console.log('File uploaded successfully');
+                    } else {
+                        console.log('File upload failed');
+                    }
+                } catch (error) {
+                    console.error('An error occurred:', error);
+                } finally {
+                    // Hide the loading message
+                    loadingMessage.style.display = 'none';
                 }
-            } catch (error) {
-                console.error('Error in sending dataset:', error);
-                return { success: false, error: 'Network error or invalid response from server' };
+            } else {
+                console.log('No file selected');
             }
-        }
+        });
     </script>
 </body>
 </html>

@@ -12,7 +12,7 @@
 <body>
     <form id="csvUploadForm" enctype="multipart/form-data">
         <input type="file" id="csvFile" accept=".csv" />
-        <button type="submit">Upload CSV</button>
+        <button type="submit">Upload the CSV</button>
     </form>
 
     <!-- Loading message -->
@@ -35,7 +35,7 @@
 
                 try {
                     // Send the file to your AWS Lambda or API Gateway endpoint
-                    const response = await fetch('https://xchs0opfx1.execute-api.us-east-2.amazonaws.com/process', {
+                    const response = await fetch('https://b3mlalrqdg.execute-api.us-east-2.amazonaws.com/process', {
                         method: 'POST',
                         body: formData,
                     });

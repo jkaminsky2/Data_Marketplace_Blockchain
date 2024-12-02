@@ -12,7 +12,7 @@
     <!-- CSV upload form -->
     <form id="csvUploadForm">
         <input type="file" id="csvFile" accept=".csv" />
-        <button type="submit">Upload CSV</button>
+        <button type="submit">Upload the CSV</button>
     </form>
 
     <!-- Loading message -->
@@ -62,11 +62,14 @@
                     });
 
                     if (response.ok) {
-                        console.log('File uploaded successfully');
-                        console.log(response);
-                    } else {
-                        console.log('File upload failed:', await response.text());
-                    }
+                      const responseData = await response.json(); // Parse JSON response
+                      console.log('File uploaded successfully:', responseData);
+                      alert(`Response from server: ${JSON.stringify(responseData)}`); // Display response to the user
+                  } else {
+                      const errorText = await response.text();
+                      console.log('File upload failed:', errorText);
+                      alert(`Error from server: ${errorText}`); // Display error to the user
+                  }
                 } catch (error) {
                     console.error('An error occurred:', error);
                 } finally {

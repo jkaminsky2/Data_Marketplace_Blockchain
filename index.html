@@ -48,10 +48,11 @@
 
                     // Prepare data to send to the Lambda function
                     const requestData = {
-                        fileName: file.name,  // Send the file name
-                        fileContent: JSON.stringify(jsonData)  // Send the JSON content
-                    };
-
+                      body: JSON.stringify({
+                          fileName: file.name, // Send the file name
+                          fileContent: JSON.stringify(jsonData) // Send the JSON content
+                      })
+                  };
                     console.log('Input:', requestData);
 
                     // Send JSON to the API
